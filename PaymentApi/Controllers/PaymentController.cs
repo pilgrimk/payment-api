@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging; // Import the logging namespace
 using AuthorizeNet.Api.Controllers;
 using AuthorizeNet.Api.Contracts.V1;
+using AuthorizeNet.Api.Controllers.Bases;
 using PaymentApi.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace PaymentApi.Controllers
 {
@@ -31,6 +32,9 @@ namespace PaymentApi.Controllers
                 _logger.LogWarning("Validation failed: Amount, first name, and last name are required.");
                 return BadRequest(new { success = false, message = "Amount, first name, and last name are required." });
             }
+
+            // Set the environment for Authorize.Net API
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX; // Change to PRODUCTION when ready
 
             var merchantAuthentication = new merchantAuthenticationType()
             {
