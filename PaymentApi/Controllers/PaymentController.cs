@@ -22,6 +22,19 @@ namespace PaymentApi.Controllers
             _logger = logger; // Initialize the logger
         }
 
+        [HttpPost("test")]
+        public JsonResult Test()
+        {
+            try
+            {
+                return new JsonResult("Test");
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult("Test Error: " + ex.Message);
+            }
+        }
+
         [HttpPost("get-token")]
         public IActionResult GetToken([FromBody] PaymentRequest request)
         {
