@@ -46,8 +46,8 @@ namespace PaymentApi.Controllers
                 return BadRequest(new { success = false, message = "Amount, first name, and last name are required." });
             }
 
-            // Set the environment for Authorize.Net API
-            ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX; // Change to PRODUCTION when ready
+            // Set the environment for Authorize.Net API, change to PRODUCTION when ready
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.PRODUCTION;
 
             var merchantAuthentication = new merchantAuthenticationType()
             {
